@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [H("Player Stats")]
     public float moveSpeed = 5f;
-    public float smoothness = 5f;
+    private float smoothness = 5f;
 
     [H("Triggers")]
     [SF] private TriggerCommunicator Top;
@@ -30,31 +30,32 @@ public class PlayerMovement : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-
+    {   
+        GetDirection();
         Vector2 direction = new(0, 0);
+        if (currentDirection == MoveDirection.None)
+            direction.y = -1;
+
         if(currentDirection is MoveDirection.LeftRight or MoveDirection.Both)
         {
-            if (Input.GetKey(A))
-                direction.x--;
-            if (Input.GetKey(D)) 
-                direction.x++;
+            direction.x = Input.GetAxis("Horizontal");
         }
         if(currentDirection is MoveDirection.UpDown or MoveDirection.Both)
         {
-            if (Input.GetKey(W))
-                direction.y++;
-            if(Input.GetKey(S))
-                direction.y--;
+            direction.y = Input.GetAxis("Vertical");
         }
-        if (direction != Vector2.zero)
-            direction.Normalize();
+        //if (direction != Vector2.zero)
+        //    direction.Normalize();
 
-        rb.velocity = Vector2.Lerp(rb.velocity, direction * moveSpeed, smoothness);
+        Debug.Log(direction.x);
+
+        rb.velocity = direction * moveSpeed;
     }
 
     public void GetDirection()
     {
+        currentDirection = MoveDirection.None;
+
         if (Top.isColliding || Bottom.isColliding)
             currentDirection = MoveDirection.LeftRight;
         if(Left.isColliding || Right.isColliding)
@@ -66,5 +67,6 @@ public enum MoveDirection
 {
     LeftRight,
     UpDown,
-    Both
+    Both,
+    None
 }
