@@ -23,4 +23,6 @@ public class TriggerCommunicator : MonoBehaviour
             isColliding = false;
         }
     }
+
+    public static implicit operator bool(TriggerCommunicator self) => self.isColliding;
 }
