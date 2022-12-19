@@ -1,16 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.KeyCode;
 using SF = UnityEngine.SerializeField;
 using H = UnityEngine.HeaderAttribute;
-
+using System.Linq;
 
 public class PlayerMovement : MonoBehaviour
 {
     [H("Player Stats")]
     public float moveSpeed = 5f;
-    private float smoothness = 5f;
+
+    [H("Sounds")]
+    [SF] private AudioClip[] slimySounds;
+    private AudioSource source;
 
     [H("Triggers")]
     [SF] private TriggerCommunicator Top;
@@ -25,12 +27,32 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        source = gameObject.AddComponent<AudioSource>();
+
+        Top.OnColisionEnter += PlaySound;
+        Bottom.OnColisionEnter += PlaySound;
+        Left.OnColisionEnter += PlaySound;
+        Right.OnColisionEnter += PlaySound;
+
         rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
-    {   
+    {
+        if (Input.GetKey(KeyCode.Space))
+        {
+            Top.gameObject.SetActive(false);
+            Right.gameObject.SetActive(false);
+            Left.gameObject.SetActive(false);
+        }
+        else
+        {
+            Top.gameObject.SetActive(true);
+            Right.gameObject.SetActive(true);
+            Left.gameObject.SetActive(true);
+        }
+
         GetDirection();
         Vector2 direction = new(0, 0);
         if (currentDirection == MoveDirection.None)
@@ -45,7 +67,7 @@ public class PlayerMovement : MonoBehaviour
             direction.y = Input.GetAxis("Vertical");
         }
         //if (direction != Vector2.zero)
-        //    direction.Normalize();
+        //    direction.Normalize(); 
 
         Debug.Log(direction.x);
 
@@ -60,6 +82,12 @@ public class PlayerMovement : MonoBehaviour
             currentDirection = MoveDirection.LeftRight;
         if(Left.isColliding || Right.isColliding)
             currentDirection = currentDirection == MoveDirection.LeftRight ? MoveDirection.Both : MoveDirection.UpDown;
+    }
+
+    public void PlaySound()
+    {
+        source.clip = slimySounds.OrderBy(x => new System.Random().Next()).First();
+        source.Play();
     }
 }
 
