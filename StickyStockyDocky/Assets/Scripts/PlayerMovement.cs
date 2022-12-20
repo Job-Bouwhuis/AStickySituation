@@ -45,6 +45,9 @@ public class PlayerMovement : MonoBehaviour
         SpeedPower.OnPowerUpActivate += OnSpeedIncrease;
         SpeedPower.OnPowerUpDeactivate += OnSpeedReset;
 
+        Spikes.OnPlayerDebuffActivate += OnSpeedDebuff;
+        Spikes.OnPlayerDebuffDeactivate += OnSpeedReset;
+
         rb = GetComponent<Rigidbody2D>();
     }
 
