@@ -13,6 +13,6 @@ public class TimerScript : MonoBehaviour
     private void Update()
     {
         ts = TimeSpan.FromSeconds(Time.timeAsDouble);
-        timerText.text = "Time : " + ts.Seconds + "." + ts.Milliseconds;
+        timerText.text = "Time : " + ts.Minutes + "." + ts.Seconds + "." + ts.Milliseconds;
     }
 }
