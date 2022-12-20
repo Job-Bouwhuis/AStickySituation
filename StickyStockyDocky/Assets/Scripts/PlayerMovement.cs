@@ -28,16 +28,22 @@ public class PlayerMovement : MonoBehaviour
     [SF] private AllowedPlayerMovements currentDirection;
     [SF] private ColliderType currentColliderType;
     [SF] private Rigidbody2D rb;
-
+    [SF] private bool hasPowerup = false;
+    [SF] private float baseMoveSpeed;
     // Start is called before the first frame update
     private void Awake()
     {
+        baseMoveSpeed = moveSpeed;
+
         source = gameObject.AddComponent<AudioSource>();
 
         TopLeft.OnColisionEnter += PlaySound;
         TopRight.OnColisionEnter += PlaySound;
         BottomLeft.OnColisionEnter += PlaySound;
         BottomRight.OnColisionEnter += PlaySound;
+
+        SpeedPower.OnPowerUpActivate += OnPowerUpEnable;
+        SpeedPower.OnPowerUpDeactivate += OnPowerUpDisable;
 
         rb = GetComponent<Rigidbody2D>();
     }
@@ -47,6 +53,25 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = (GetDirection() is AllowedPlayerMovements.None || Input.GetKey(KeyCode.Space)) ? new Vector2(0, -1) * (moveSpeed * 2) :
             new Vector2(currentDirection is AllowedPlayerMovements.LeftRight or AllowedPlayerMovements.Both ? Input.GetAxis("Horizontal") : 0,
             currentDirection is AllowedPlayerMovements.UpDown or AllowedPlayerMovements.Both ? Input.GetAxis("Vertical") : 0) * moveSpeed;
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+            UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+    }
+    private void OnPowerUpEnable()
+    {
+        if (hasPowerup)
+            return;
+        hasPowerup = true;
+        moveSpeed *= 2;
+    }
+    private void OnPowerUpDisable()
+    {
+        if (!hasPowerup)
+            return;
+        hasPowerup = false;
+        moveSpeed = baseMoveSpeed;
+    }
 
     private AllowedPlayerMovements GetDirection()
     {
