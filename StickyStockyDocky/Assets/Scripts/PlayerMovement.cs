@@ -42,8 +42,8 @@ public class PlayerMovement : MonoBehaviour
         BottomLeft.OnColisionEnter += PlaySound;
         BottomRight.OnColisionEnter += PlaySound;
 
-        SpeedPower.OnPowerUpActivate += OnPowerUpEnable;
-        SpeedPower.OnPowerUpDeactivate += OnPowerUpDisable;
+        SpeedPower.OnPowerUpActivate += OnSpeedIncrease;
+        SpeedPower.OnPowerUpDeactivate += OnSpeedReset;
 
         rb = GetComponent<Rigidbody2D>();
     }
@@ -53,19 +53,27 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = (GetDirection() is AllowedPlayerMovements.None || Input.GetKey(KeyCode.Space)) ? new Vector2(0, -1) * (moveSpeed * 2) :
             new Vector2(currentDirection is AllowedPlayerMovements.LeftRight or AllowedPlayerMovements.Both ? Input.GetAxis("Horizontal") : 0,
             currentDirection is AllowedPlayerMovements.UpDown or AllowedPlayerMovements.Both ? Input.GetAxis("Vertical") : 0) * moveSpeed;
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
             UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
     }
-    private void OnPowerUpEnable()
+
+    private void OnSpeedIncrease()
     {
         if (hasPowerup)
             return;
         hasPowerup = true;
         moveSpeed *= 2;
     }
-    private void OnPowerUpDisable()
+    private void OnSpeedDebuff()
+    {
+        hasPowerup = true;
+        moveSpeed = baseMoveSpeed;
+        moveSpeed /= 2;
+    }
+    private void OnSpeedReset()
     {
         if (!hasPowerup)
             return;
