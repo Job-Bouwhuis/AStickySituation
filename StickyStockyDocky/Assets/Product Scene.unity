@@ -442,7 +442,7 @@ TilemapRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
-  m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
+  m_ChunkCullingBounds: {x: 0.09500003, y: 0.09500003, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 0
@@ -457,17 +457,61 @@ Tilemap:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 157266242}
   m_Enabled: 1
-  m_Tiles: {}
+  m_Tiles:
+  - first: {x: -1, y: 0, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 0
+      m_TileSpriteIndex: 0
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: 0, y: 0, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 0
+      m_TileSpriteIndex: 0
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
   m_AnimatedTiles: {}
-  m_TileAssetArray: []
-  m_TileSpriteArray: []
-  m_TileMatrixArray: []
-  m_TileColorArray: []
+  m_TileAssetArray:
+  - m_RefCount: 2
+    m_Data: {fileID: 11400000, guid: b243559280fa936499c958fb18fe6573, type: 2}
+  m_TileSpriteArray:
+  - m_RefCount: 2
+    m_Data: {fileID: 21300000, guid: ace6930c03f36a8498fb0c96db29dadf, type: 3}
+  m_TileMatrixArray:
+  - m_RefCount: 2
+    m_Data:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+  m_TileColorArray:
+  - m_RefCount: 2
+    m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Origin: {x: 0, y: 0, z: 0}
-  m_Size: {x: 0, y: 0, z: 1}
+  m_Origin: {x: -1, y: 0, z: 0}
+  m_Size: {x: 2, y: 1, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
@@ -496,7 +540,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 169555214}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Spears PT1 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -618,7 +662,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 232303442}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: End
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -651,7 +695,7 @@ GameObject:
   - component: {fileID: 235773043}
   - component: {fileID: 235773045}
   - component: {fileID: 235773044}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -767,7 +811,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 259377693}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Start3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1058,7 +1102,7 @@ GameObject:
   - component: {fileID: 370313146}
   - component: {fileID: 370313148}
   - component: {fileID: 370313147}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1588,7 +1632,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 512917713}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Start1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1667,7 +1711,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 609259270}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: End
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1698,7 +1742,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 616353115}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: End
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1731,7 +1775,7 @@ GameObject:
   - component: {fileID: 622443076}
   - component: {fileID: 622443078}
   - component: {fileID: 622443077}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1967,7 +2011,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 651321783}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.5, y: -2.5, z: -0.011681613}
+  m_LocalPosition: {x: 4.5, y: -2.5, z: -0.28}
   m_LocalScale: {x: 1, y: 6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2293,7 +2337,7 @@ GameObject:
   - component: {fileID: 725619805}
   - component: {fileID: 725619807}
   - component: {fileID: 725619806}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: 'Spear '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2308,7 +2352,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 725619804}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -10.5, y: -2.5, z: -0.011681613}
+  m_LocalPosition: {x: -10.5, y: -2.5, z: -0.14}
   m_LocalScale: {x: 1, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2394,7 +2438,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 746370953}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Start3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2632,7 +2676,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 829452649}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: End
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3156,7 +3200,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1019494836}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Start1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3250,7 +3294,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1066833941}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: End
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3418,7 +3462,7 @@ GameObject:
   - component: {fileID: 1101896694}
   - component: {fileID: 1101896696}
   - component: {fileID: 1101896695}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3627,7 +3671,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1168061054}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Spears PT1 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3666,7 +3710,7 @@ GameObject:
   - component: {fileID: 1257307272}
   - component: {fileID: 1257307274}
   - component: {fileID: 1257307273}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Spear2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3681,7 +3725,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1257307271}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.5, y: -2.5, z: -0.011681613}
+  m_LocalPosition: {x: -0.5, y: -2.5, z: -0.28}
   m_LocalScale: {x: 1, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3769,7 +3813,7 @@ GameObject:
   - component: {fileID: 1261635345}
   - component: {fileID: 1261635347}
   - component: {fileID: 1261635346}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Spear1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3784,7 +3828,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1261635344}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.5, y: -2.5, z: -0.011681613}
+  m_LocalPosition: {x: -5.5, y: -2.5, z: -0.15}
   m_LocalScale: {x: 1, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4425,7 +4469,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1439034752}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Start2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4799,7 +4843,7 @@ GameObject:
   - component: {fileID: 1543919686}
   - component: {fileID: 1543919688}
   - component: {fileID: 1543919687}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4932,7 +4976,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1579369010}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -10.5, y: -2.5, z: -0.011681613}
+  m_LocalPosition: {x: -10.5, y: -2.5, z: -0.19}
   m_LocalScale: {x: 1, y: 6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5449,7 +5493,7 @@ GameObject:
   - component: {fileID: 1757445796}
   - component: {fileID: 1757445798}
   - component: {fileID: 1757445797}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: 'Spear '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5464,7 +5508,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1757445795}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -10.5, y: -2.5, z: -0.011681613}
+  m_LocalPosition: {x: -10.5, y: -2.5, z: -0.2}
   m_LocalScale: {x: 1, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5685,7 +5729,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1778990633}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.5, y: -2.5, z: -0.011681613}
+  m_LocalPosition: {x: -0.5, y: -2.5, z: -0.15}
   m_LocalScale: {x: 1, y: 6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5805,7 +5849,7 @@ GameObject:
   - component: {fileID: 1783195240}
   - component: {fileID: 1783195242}
   - component: {fileID: 1783195241}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -76014,7 +76058,7 @@ GameObject:
   - component: {fileID: 1948154693}
   - component: {fileID: 1948154695}
   - component: {fileID: 1948154694}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Spear1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -76029,7 +76073,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1948154692}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.5, y: -2.5, z: -0.011681613}
+  m_LocalPosition: {x: -5.5, y: -2.5, z: -0.38}
   m_LocalScale: {x: 1, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -76117,7 +76161,7 @@ GameObject:
   - component: {fileID: 1960392410}
   - component: {fileID: 1960392412}
   - component: {fileID: 1960392411}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Spear2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -76132,7 +76176,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1960392409}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.5, y: -2.5, z: -0.011681613}
+  m_LocalPosition: {x: -0.5, y: -2.5, z: -0.14}
   m_LocalScale: {x: 1, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -76454,7 +76498,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1968007270}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: End
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -76485,7 +76529,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2010920862}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Start2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -76519,6 +76563,7 @@ GameObject:
   - component: {fileID: 2039658202}
   - component: {fileID: 2039658204}
   - component: {fileID: 2039658203}
+  - component: {fileID: 2039658205}
   m_Layer: 6
   m_Name: Spear1
   m_TagString: Untagged
@@ -76534,7 +76579,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2039658201}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.5, y: -2.5, z: -0.011681613}
+  m_LocalPosition: {x: -5.5, y: -2.5, z: -0.25}
   m_LocalScale: {x: 1, y: 6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -76612,6 +76657,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!65 &2039658205
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2039658201}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.2, y: 1.2, z: 0.2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2080093581
 GameObject:
   m_ObjectHideFlags: 0
