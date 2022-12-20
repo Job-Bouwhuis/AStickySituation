@@ -3,11 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
+#nullable enable
 public class SceneLoader : MonoBehaviour
 {
     public Toggle soundeffects;
     public Toggle music;
+    public AudioSource? source;
+
+    private void Awake()
+    {
+        source = GetComponent<AudioSource>();
+    }
+
     /// <summary>
     /// Loads the scene at the given BuildIndex. if <paramref name="scene"/> is set to 10 the application will quit
     /// </summary>
@@ -21,6 +28,11 @@ public class SceneLoader : MonoBehaviour
     {
         if (music == null)
             return;
+        if (source != null)
+            if (music.isOn)
+                source.Play();
+            else source.Stop();
+
         Debug.Log(music.isOn);
         PlayerPrefs.SetInt("PlayMusic", music.isOn ? 1 : 0);
     }
