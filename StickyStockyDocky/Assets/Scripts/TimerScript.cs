@@ -4,15 +4,22 @@ using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
 using System;
+using System.Diagnostics;
 
 public class TimerScript : MonoBehaviour
 {
     public TMP_Text timerText;
-    public TimeSpan ts;
+    Stopwatch timer;
+
+    private void Awake()
+    {
+        timer = Stopwatch.StartNew();
+    }
 
     private void Update()
     {
-        ts = TimeSpan.FromSeconds(Time.timeAsDouble);
-        timerText.text = "Time : " + ts.Minutes + "." + ts.Seconds + "." + ts.Milliseconds;
+        TimeSpan time = timer.Elapsed;
+
+        timerText.text = $"Time: {time.Minutes}:{time.Seconds}.{time.Milliseconds}";
     }
 }
