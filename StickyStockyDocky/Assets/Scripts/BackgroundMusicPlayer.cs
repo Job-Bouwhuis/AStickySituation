@@ -9,7 +9,7 @@ public class BackgroundMusicPlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        source = GetComponent<AudioSource>();
+        source = gameObject.AddComponent<AudioSource>();
         source.loop = true;
         source.clip = music;
         source.playOnAwake = false;
