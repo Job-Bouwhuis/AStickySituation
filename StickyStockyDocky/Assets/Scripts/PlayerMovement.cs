@@ -1,12 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 using SF = UnityEngine.SerializeField;
 using H = UnityEngine.HeaderAttribute;
-using System.Linq;
 
+/// <summary>
+/// Player movement script. 
+/// </summary>
 public class PlayerMovement : MonoBehaviour
 {
+    /// <summary>
+    /// The speed at which the player moves. this is doubled for falling
+    /// </summary>
     [H("Player Stats")]
     public float moveSpeed = 5f;
 
@@ -15,86 +19,122 @@ public class PlayerMovement : MonoBehaviour
     private AudioSource source;
 
     [H("Triggers")]
-    [SF] private TriggerCommunicator Top;
-    [SF] private TriggerCommunicator Bottom;
-    [SF] private TriggerCommunicator Left;
-    [SF] private TriggerCommunicator Right;
-    
+    [SF] private TriggerCommunicator TopLeft;
+    [SF] private TriggerCommunicator TopRight;
+    [SF] private TriggerCommunicator BottomLeft;
+    [SF] private TriggerCommunicator BottomRight;
+
     [H("DO NOT SET THESE VALUES. THIS IS FOR DEBUGGING!")]
-    [SF] private MoveDirection currentDirection;
+    [SF] private AllowedPlayerMovements currentDirection;
+    [SF] private ColliderType currentColliderType;
     [SF] private Rigidbody2D rb;
 
     // Start is called before the first frame update
-    void Awake()
+    private void Awake()
     {
         source = gameObject.AddComponent<AudioSource>();
 
-        Top.OnColisionEnter += PlaySound;
-        Bottom.OnColisionEnter += PlaySound;
-        Left.OnColisionEnter += PlaySound;
-        Right.OnColisionEnter += PlaySound;
+        TopLeft.OnColisionEnter += PlaySound;
+        TopRight.OnColisionEnter += PlaySound;
+        BottomLeft.OnColisionEnter += PlaySound;
+        BottomRight.OnColisionEnter += PlaySound;
 
         rb = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
-    void Update()
+    // hehehe managed to get this into a one liner.... less readable but im proud of myself XD
+    private void FixedUpdate() =>
+        rb.velocity = (GetDirection() is AllowedPlayerMovements.None || Input.GetKey(KeyCode.Space)) ? new Vector2(0, -1) * (moveSpeed * 2) :
+            new Vector2(currentDirection is AllowedPlayerMovements.LeftRight or AllowedPlayerMovements.Both ? Input.GetAxis("Horizontal") : 0,
+            currentDirection is AllowedPlayerMovements.UpDown or AllowedPlayerMovements.Both ? Input.GetAxis("Vertical") : 0) * moveSpeed;
+
+    private AllowedPlayerMovements GetDirection()
     {
-        if (Input.GetKey(KeyCode.Space))
+        currentDirection = AllowedPlayerMovements.None;
+        currentColliderType = ColliderType.None;
+
+        bool[] colliders = new bool[4] { TopLeft, BottomRight, TopRight, BottomLeft };
+        if (colliders.Where(x => x).Count() == 1)
         {
-            Top.gameObject.SetActive(false);
-            Right.gameObject.SetActive(false);
-            Left.gameObject.SetActive(false);
-        }
-        else
-        {
-            Top.gameObject.SetActive(true);
-            Right.gameObject.SetActive(true);
-            Left.gameObject.SetActive(true);
+            currentDirection = AllowedPlayerMovements.Both;
+            return currentDirection;
         }
 
-        GetDirection();
-        Vector2 direction = new(0, 0);
-        if (currentDirection == MoveDirection.None)
-            direction.y = -1;
-
-        if(currentDirection is MoveDirection.LeftRight or MoveDirection.Both)
+        if (TopLeft && TopRight || BottomLeft && BottomRight)
         {
-            direction.x = Input.GetAxis("Horizontal");
+            currentDirection = AllowedPlayerMovements.LeftRight;
+            currentColliderType = BottomLeft && BottomRight ? ColliderType.HorizontalBottom : ColliderType.HorizontalTop;
         }
-        if(currentDirection is MoveDirection.UpDown or MoveDirection.Both)
+        else if (TopLeft && BottomLeft || TopRight && BottomRight)
         {
-            direction.y = Input.GetAxis("Vertical");
+            currentDirection = AllowedPlayerMovements.UpDown;
+            currentColliderType = TopRight && BottomRight ? ColliderType.VerticalRight : ColliderType.VerticalLeft;
         }
-        //if (direction != Vector2.zero)
-        //    direction.Normalize(); 
 
-        Debug.Log(direction.x);
+        if (currentColliderType == ColliderType.HorizontalBottom && (TopRight || TopLeft))
+            currentDirection = AllowedPlayerMovements.Both;
+        if (currentColliderType == ColliderType.HorizontalTop && (BottomRight || BottomLeft))
+            currentDirection = AllowedPlayerMovements.Both;
+        if (currentColliderType == ColliderType.VerticalLeft && (TopRight || BottomRight))
+            currentDirection = AllowedPlayerMovements.Both;
+        if (currentColliderType == ColliderType.VerticalRight && (TopLeft || BottomLeft))
+            currentDirection = AllowedPlayerMovements.Both;
 
-        rb.velocity = direction * moveSpeed;
+        return currentDirection;
     }
 
-    public void GetDirection()
+    /// <summary>
+    /// Defines the type of collision that has taken place. used for movement logic
+    /// </summary>
+    private enum ColliderType
     {
-        currentDirection = MoveDirection.None;
-
-        if (Top.isColliding || Bottom.isColliding)
-            currentDirection = MoveDirection.LeftRight;
-        if(Left.isColliding || Right.isColliding)
-            currentDirection = currentDirection == MoveDirection.LeftRight ? MoveDirection.Both : MoveDirection.UpDown;
+        /// <summary>
+        /// None
+        /// </summary>
+        None,
+        /// <summary>
+        /// The two colliders register a collision
+        /// </summary>
+        HorizontalTop,
+        /// <summary>
+        /// The bottom two colliders register a collision
+        /// </summary>
+        HorizontalBottom,
+        /// <summary>
+        /// The right two colliders register a collision
+        /// </summary>
+        VerticalRight,
+        /// <summary>
+        /// the left two colliders register a collision
+        /// </summary>
+        VerticalLeft
     }
-
-    public void PlaySound()
+    private void PlaySound()
     {
         source.clip = slimySounds.OrderBy(x => new System.Random().Next()).First();
         source.Play();
     }
 }
 
-public enum MoveDirection
+/// <summary>
+/// The types of movement allowed for the player
+/// </summary>
+public enum AllowedPlayerMovements
 {
+    /// <summary>
+    /// Undefined.
+    /// </summary>
+    None,
+    /// <summary>
+    /// Player may move only left or right
+    /// </summary>
     LeftRight,
+    /// <summary>
+    /// Player may only move up or down
+    /// </summary>
     UpDown,
-    Both,
-    None
+    /// <summary>
+    /// Player may move in all 4 directions
+    /// </summary>
+    Both
 }

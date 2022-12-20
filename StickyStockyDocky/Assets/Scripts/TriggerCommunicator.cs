@@ -13,7 +13,7 @@ public class TriggerCommunicator : MonoBehaviour
         if (collision.CompareTag("Plak"))
         {
             isColliding = true;
-            OnColisionEnter();
+            OnColisionEnter?.Invoke();
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -23,4 +23,6 @@ public class TriggerCommunicator : MonoBehaviour
             isColliding = false;
         }
     }
+
+    public static implicit operator bool(TriggerCommunicator self) => self.isColliding;
 }
