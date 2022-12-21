@@ -45,12 +45,16 @@ public class PlayerMovement : MonoBehaviour
         SpeedPower.OnPowerUpActivate += OnSpeedIncrease;
         SpeedPower.OnPowerUpDeactivate += OnSpeedReset;
 
+        Spikes.OnPlayerDebuffActivate += OnSpeedDebuff;
+        Spikes.OnPlayerDebuffDeactivate += OnSpeedReset;
+
         rb = GetComponent<Rigidbody2D>();
     }
 
     // hehehe managed to get this into a one liner.... less readable but im proud of myself XD
     private void FixedUpdate() =>
-        rb.velocity = (GetDirection() is AllowedPlayerMovements.None || Input.GetKey(KeyCode.Space)) ? new Vector2(0, -1) * (moveSpeed * 2) :
+        rb.velocity = (GetDirection() is AllowedPlayerMovements.None || (Input.GetKey(KeyCode.Space) &&
+        currentColliderType is not ColliderType.HorizontalBottom)) ? new Vector2(0, -1) * (moveSpeed * 2) :
             new Vector2(currentDirection is AllowedPlayerMovements.LeftRight or AllowedPlayerMovements.Both ? Input.GetAxis("Horizontal") : 0,
             currentDirection is AllowedPlayerMovements.UpDown or AllowedPlayerMovements.Both ? Input.GetAxis("Vertical") : 0) * moveSpeed;
 

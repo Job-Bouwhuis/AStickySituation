@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
+#nullable enable
 public class SceneLoader : MonoBehaviour
 {
     public Toggle soundeffects;
     public Toggle music;
+
     /// <summary>
     /// Loads the scene at the given BuildIndex. if <paramref name="scene"/> is set to 10 the application will quit
     /// </summary>
@@ -21,7 +22,9 @@ public class SceneLoader : MonoBehaviour
     {
         if (music == null)
             return;
+
         Debug.Log(music.isOn);
+
         PlayerPrefs.SetInt("PlayMusic", music.isOn ? 1 : 0);
     }
     public void SetSoundEffectValue()

@@ -3,16 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(BoxCollider2D))]
 public class SpeedPower : MonoBehaviour
 {
     /// <summary>
     /// Gets invoked when the player collides with a powerup object
     /// </summary>
-    public static Action OnPowerUpActivate;
+    public static Action OnPowerUpActivate = delegate { };
     /// <summary>
     /// Gets invoked when the powerup should be dissabled
     /// </summary>
-    public static Action OnPowerUpDeactivate;
+    public static Action OnPowerUpDeactivate = delegate { };
 
     public float powerUpDurationInSeconds = 5;
 
@@ -30,7 +31,7 @@ public class SpeedPower : MonoBehaviour
         {
             shouldCount = false;
             time = 0;
-            OnPowerUpDeactivate?.Invoke();
+            OnPowerUpDeactivate();
             Destroy(gameObject);
         }
     }
@@ -39,7 +40,7 @@ public class SpeedPower : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            OnPowerUpActivate?.Invoke();
+            OnPowerUpActivate();
             Graphic.SetActive(false);
             GetComponent<BoxCollider2D>().enabled = false;
             shouldCount = true;
