@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(BoxCollider2D))]
 public class Spikes : MonoBehaviour
 {
     private bool shouldCount;
@@ -54,5 +55,20 @@ public class Spikes : MonoBehaviour
             onSpikes = false;
         }
             
+    }
+
+    /// <summary>
+    /// yes this shouldnt be in this script, but im lazy fuck you
+    /// </summary>
+    public static void InvokePlayerDebuffActivate()
+    {
+        OnPlayerDebuffActivate();
+    }
+    /// <summary>
+    /// yes this shouldnt be in this script, but im lazy fuck you
+    /// </summary>
+    public static void InvokePlayerDebuffDeactivate()
+    {
+        OnPlayerDebuffDeactivate();
     }
 }
