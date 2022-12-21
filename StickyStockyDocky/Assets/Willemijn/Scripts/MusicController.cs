@@ -4,17 +4,20 @@ using UnityEngine;
 
 public class MusicController : MonoBehaviour
 {
-    public AudioSource Source;
+    public AudioClip clip;
+    private AudioSource source;
 
     // Start is called before the first frame update
     void Start()
     {
-        PlayerPrefs.GetInt("PlayMusic");
-    }
+        source = gameObject.AddComponent<AudioSource>();
+        bool shouldPlay = PlayerPrefs.GetInt("PlayMusic") == 1;
+        Debug.Log(shouldPlay);
+        source.playOnAwake = false;
+        source.clip = clip;
+        source.loop = true;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (shouldPlay)
+            source.Play();
     }
 }
