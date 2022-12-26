@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Willemijn/Scenes/FinishAndScore.unity
     guid: 561f7b0c8d28171499d8f116766b7744
+  - enabled: 1
+    path: Assets/Product Scene.unity
+    guid: a3977791ca877c740a829285fc5c78ff
   m_configObjects: {}

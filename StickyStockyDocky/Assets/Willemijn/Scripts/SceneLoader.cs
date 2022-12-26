@@ -9,6 +9,12 @@ public class SceneLoader : MonoBehaviour
     public Toggle soundeffects;
     public Toggle music;
 
+    private void Awake()
+    {
+        soundeffects.isOn = PlayerPrefs.GetInt("PlayEffects") == 1;
+        music.isOn = PlayerPrefs.GetInt("PlayMusic") == 1;
+    }
+
     /// <summary>
     /// Loads the scene at the given BuildIndex. if <paramref name="scene"/> is set to 10 the application will quit
     /// </summary>

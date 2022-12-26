@@ -13,8 +13,9 @@ public class BackgroundMusicPlayer : MonoBehaviour
         source.loop = true;
         source.clip = music;
         source.playOnAwake = false;
-         
+
         bool shouldPlay = PlayerPrefs.GetInt("PlayMusic") == 1;
-        source.Play();
+        if (shouldPlay)
+            source.Play();
     }
 }

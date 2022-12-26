@@ -148,6 +148,8 @@ public class PlayerMovement : MonoBehaviour
     }
     private void PlaySound()
     {
+        if (PlayerPrefs.GetInt("PlayEffects") == 0)
+            return;
         source.clip = slimySounds.OrderBy(x => new System.Random().Next()).First();
         source.Play();
     }

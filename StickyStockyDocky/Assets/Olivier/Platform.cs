@@ -8,6 +8,7 @@ public class Platform : MonoBehaviour
     public float speed;
     public int startingPoint;
     public Transform[] points;
+    public Vector2 translation = Vector2.zero;
 
     private int i;
 
@@ -37,6 +38,6 @@ public class Platform : MonoBehaviour
                 i = 0;
             }
         }
-        transform.position = Vector2.MoveTowards(transform.position, points[i].position, speed * Time.deltaTime);
+        transform.position = translation = Vector2.MoveTowards(transform.position, points[i].position, speed * Time.deltaTime);
     }
 }
